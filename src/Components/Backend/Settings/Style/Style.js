@@ -203,7 +203,7 @@ const Style = ({ attributes, setAttributes }) => {
       {/* Card Border Radius */}
       <PanelBody
         className="bPlPanelBody"
-        title={__("Border Radius", "b-blocks")}
+        title={__("Card Border Radius", "b-blocks")}
         initialOpen={false}
       >
         <BoxControl

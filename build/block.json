@@ -209,12 +209,22 @@
       "default": "left"
     },
     "categoryMargin": {
-      "type": "string",
-      "default": "0px"
+      "type": "object",
+      "default": {
+        "top": "0px",
+        "right": "0px",
+        "bottom": "0px",
+        "left": "0px"
+      }
     },
     "categoryPadding": {
-      "type": "string",
-      "default": "0px"
+      "type": "object",
+      "default": {
+        "top": "0px",
+        "right": "0px",
+        "bottom": "0px",
+        "left": "0px"
+      }
     }
   },
   "supports": {
