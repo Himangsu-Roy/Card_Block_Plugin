@@ -9,8 +9,56 @@
   font-weight: 700;
 }
 
-.wp-block-b-blocks-test-purpose .selectHelp {
-  color: #616063;
+.wp-block-b-blocks-test-purpose .bBlocksCard {
+  margin: 0 auto;
+  background-color: #c89b7b;
+  padding: 40px;
+  width: 60%;
+}
+.wp-block-b-blocks-test-purpose .bBlocksCard .card {
+  margin: 0 auto;
+  background-color: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+}
+.wp-block-b-blocks-test-purpose .bBlocksCard .card img {
+  border-radius: 15px;
+}
+.wp-block-b-blocks-test-purpose .bBlocksCard .card .title {
+  padding: 0;
+  font-size: 1.2em;
+  font-weight: 800;
+}
+.wp-block-b-blocks-test-purpose .bBlocksCard .card .description {
+  padding: 0;
+  font-size: 0.75em;
+  color: #505050;
+  font-weight: 400;
+}
+.wp-block-b-blocks-test-purpose .bBlocksCard .card .category-buttons {
+  background-color: #ffa500;
+  font-weight: 500;
+  color: #000;
+  border-radius: 15px;
+  margin-right: 10px;
+}
+.wp-block-b-blocks-test-purpose .bBlocksCard .card .bottom-components {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.wp-block-b-blocks-test-purpose .bBlocksCard .card .bottom-components .price {
+  padding: 0px;
+  font-weight: 800;
+  font-size: 1.2em;
+}
+.wp-block-b-blocks-test-purpose .bBlocksCard .card .bottom-components .button {
+  background-color: #fff;
+  color: #fff;
+  border-radius: 100px;
+  padding: 15px;
+  font-weight: 500;
 }
 
 /*# sourceMappingURL=index.css.map*/

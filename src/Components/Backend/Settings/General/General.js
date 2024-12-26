@@ -58,8 +58,11 @@ import {
   Guide,
   TextareaControl,
   PanelRow,
+  IconButton,
 } from "@wordpress/components";
-import { wordpress } from "@wordpress/icons";
+
+import { MediaUpload } from "@wordpress/block-editor";
+import { button, wordpress } from "@wordpress/icons";
 
 import { purposeTypeOptions } from "../../../../utils/options";
 import { updateData } from "../../../../utils/functions";
@@ -211,7 +214,13 @@ const General = ({
   fallbackTextColor,
   fallbackBackgroundColor,
 }) => {
-  const { purposeType } = attributes;
+  const {
+    purposeType,
+    productPrice,
+    productTitle,
+    productDescription,
+    buttonText,
+  } = attributes;
   const [click, setClick] = useState(0);
   const [isChecked, setChecked] = useState(true);
   const [currentColor, setCurrentColor] = useState();
@@ -374,15 +383,21 @@ const General = ({
   // Contrained Tabbing
   console.log(isConstrainedTabbing);
 
+  function onSelectImage(newImage) {
+    setAttributes({ image: newImage.sizes.full.url });
+    console.log(newImage.sizes.full.url);
+  }
+
   return (
-    <PanelBody
-      className="bPlPanelBody"
-      title={__("Purpose", "b-blocks")}
-      initialOpen={false}
-    >
-      <PanelRow>My Panel Inputs and Labels</PanelRow>
-      <MyPanel />
-      <SelectControl
+    <>
+      <PanelBody
+        className="bPlPanelBody"
+        title={__("Purpose", "b-blocks")}
+        initialOpen={false}
+      >
+        {/* <PanelRow>My Panel Inputs and Labels</PanelRow> */}
+        {/* <MyPanel /> */}
+        {/* <SelectControl
         label={__("Purpose", "b-blocks")}
         labelPosition="left"
         value={purposeType}
@@ -390,338 +405,25 @@ const General = ({
         onChange={(v) =>
           setAttributes({ purposeType: updateData(purposeType, v) })
         }
-      />
-      <small className="selectHelp">
+      /> */}
+        {/* <small className="selectHelp">
         If you want change your purpose?Then you select purpose here.
-      </small>
-      <InputControl
-        label="InputControl"
-        labelPosition="top"
-        value=""
-        type="email"
-        isPressEnterToChange
-        onChange={(nextValue) => console.log(nextValue)}
-      />
-      <BaseControl help="Anything you want opens on click">
-        <BaseControl.VisualLabel>Author</BaseControl.VisualLabel>
-        <Button isSecondary style={{ marginLeft: "8px" }}>
-          Select an author
-        </Button>
-      </BaseControl>
-      <ButtonGroup>
-        <Button variant="primary">Button 1</Button>
-        <Button onClick={handleClick} variant="primary">
-          Button 2
-        </Button>
-      </ButtonGroup>
-      <Button variant="secondary">Click me!</Button>
-      <Card>
-        <CardBody>Card...</CardBody>
-      </Card>
-      <Card>
-        <CardBody>...</CardBody>
-        <CardDivider />
-        <CardBody>...</CardBody>
-      </Card>
-      <Card>
-        <CardBody>Card Body</CardBody>
-        <CardFooter>Card Footer...</CardFooter>
-      </Card>
-      <Card>
-        <CardBody>Flex card footer</CardBody>
-        <CardFooter>
-          <FlexBlock>Content</FlexBlock>
-          <FlexItem>
-            <Button>Action</Button>
-          </FlexItem>
-        </CardFooter>
-      </Card>
-      <Card>
-        <CardHeader>Card Header...</CardHeader>
-        <CardBody>Card Header Body...</CardBody>
-      </Card>
-      <Card>
-        <CardMedia>
-          <img src="..." />
-        </CardMedia>
-        <CardBody>Card Media Body...</CardBody>
-      </Card>
-      <Card>
-        <CardHeader>
-          <Heading level={4}>Card Title</Heading>
-        </CardHeader>
-        <CardBody>
-          <Text>Card Content</Text>
-        </CardBody>
-        <CardFooter>
-          <Text>Card Footer</Text>
-        </CardFooter>
-      </Card>
-      <CheckboxControl
-        __nextHasNoMarginBottom
-        label="Is author"
-        help="Is the user a author or not?"
-        checked={isChecked}
-        onChange={setChecked}
-      />
-      {/* <CircularOptionPicker
-        options={colorOptions}
-        actions={
-          <CircularOptionPicker.ButtonAction
-            onClick={() => setCurrentColor(undefined)}
-          >
-            {'Clear'}
-          </CircularOptionPicker.ButtonAction>
-        }
-      /> */}
-      <ClipboardButton
-        variant="primary"
-        text="Text to be copied."
-        onCopy={() => setHasCopied(true)}
-        onFinishCopy={() => setHasCopied(false)}
-      >
-        {hasCopied ? "Copied!" : "Copy Text"}
-      </ClipboardButton>
-      <ColorIndicator colorValue="#0073aa" />
-      <ColorPalette
-        colors={colors}
-        value={color}
-        onChange={(color) => setColor(color)}
-      />
-      <ColorPicker
-        color={colorPic}
-        onChange={setColorPic}
-        enableAlpha
-        defaultValue="#000"
-      />
-      {/* <Composite>
-        <Composite.Group>
-          <Composite.GroupLabel>Label</Composite.GroupLabel>
-          <Composite.Item>Item 1</Composite.Item>
-          <Composite.Item>Item 2</Composite.Item>
-        </Composite.Group>
-      </Composite> */}
-      <ConfirmDialog onConfirm={() => console.debug(" Confirmed! ")}>
-        Are you sure? <strong>This action cannot be undone!</strong>
-      </ConfirmDialog>
-      <ConfirmDialog
-        isOpen={isOpen}
-        onConfirm={handleConfirm}
-        onCancel={handleCancel}
-      >
-        Are you sure? <strong>This action cannot be undone!</strong>
-      </ConfirmDialog>
-      <CustomSelectControl
-        __next40pxDefaultSize
-        label="Font Size"
-        options={options}
-        onChange={({ selectedItem }) => setFontSize(selectedItem)}
-      />
-      <CustomSelectControl
-        __next40pxDefaultSize
-        label="Font Size"
-        options={options}
-        onChange={({ selectedItem }) => setFontSize(selectedItem)}
-        value={options.find((option) => option.key === fontSize.key)}
-      />
-      {/* <Flyout trigger={<Button>Show/Hide content</Button>}>
-        <Text>Code is Poetry</Text>
-      </Flyout> */}
-      <div>
-        <Dashicon icon="admin-home" />
-        <Dashicon icon="products" />
-        <Dashicon icon="wordpress" />
-      </div>
-      <DateTimePicker
-        currentDate={date}
-        onChange={(newDate) => setDate(newDate)}
-        is12Hour={true}
-      />
-      <div>
-        {input}
-        <Button variant="primary" onClick={toggleDisabled}>
-          Toggle Disabled
-        </Button>
-      </div>
-      <VStack spacing={4}>
-        <Text>Some text here</Text>
-        <Divider />
-        <Text>Some more text here</Text>
-      </VStack>
-      <div id="draggable-panel">
-        <Panel header="Draggable panel">
-          <PanelBody>
-            <Draggable elementId="draggable-panel" transferData={{}}>
-              {({ onDraggableStart, onDraggableEnd }) => (
-                <div
-                  className="example-drag-handle"
-                  draggable
-                  onDragStart={onDraggableStart}
-                  onDragEnd={onDraggableEnd}
-                >
-                  <Icon icon={more} />
-                </div>
-              )}
-            </Draggable>
-          </PanelBody>
-        </Panel>
-      </div>
-      <div>
-        {hasDropped ? "Dropped!" : "Drop something here"}
-        <DropZone
-          onFilesDrop={() => setHasDropped(true)}
-          onHTMLDrop={() => setHasDropped(true)}
-          onDrop={() => setHasDropped(true)}
-        />
-      </div>
-      <DropdownMenu
-        icon={more}
-        label="Select a direction"
-        controls={[
-          {
-            title: "Up",
-            icon: arrowUp,
-            onClick: () => console.log("up"),
-          },
-          {
-            title: "Right",
-            icon: arrowRight,
-            onClick: () => console.log("right"),
-          },
-          {
-            title: "Down",
-            icon: arrowDown,
-            onClick: () => console.log("down"),
-          },
-          {
-            title: "Left",
-            icon: arrowLeft,
-            onClick: () => console.log("left"),
-          },
-        ]}
-      />
-      <Dropdown
-        className="my-container-class-name"
-        contentClassName="my-popover-content-classname"
-        popoverProps={{ placement: "bottom-start" }}
-        renderToggle={({ isOpen, onToggle }) => (
-          <Button variant="primary" onClick={onToggle} aria-expanded={isOpen}>
-            Toggle Popover!
-          </Button>
-        )}
-        renderContent={() => <div>This is the content of the popover.</div>}
-      />
-      <DuotonePicker
-        duotonePalette={DUOTONE_PALETTE}
-        colorPalette={COLOR_PALETTE}
-        value={duotone}
-        onChange={setDuotone}
-      />
-      <DuotoneSwatch values={duotone} />
-      <Surface>
-        <Text>Code is Poetry</Text>
-        <Elevation value={5} />
-      </Surface>
-      <ExternalLink href="https://wordpress.org">WordPress.org</ExternalLink>
-      {/* Form file upload */}
-      <FormFileUpload
-        __next40pxDefaultSize
-        accept="image/*"
-        onChange={(event) => console.log(event.currentTarget.files)}
-      >
-        Upload
-      </FormFileUpload>
-      <FormFileUpload
-        __next40pxDefaultSize
-        accept="audio/*, video/*, image/*, application/pdf"
-        onChange={(event) => {
-          const files = event.currentTarget.files;
-          for (let i = 0; i < files.length; i++) {
-            console.log(`File ${i + 1}:`, files[i].name, files[i].type);
-            // Add logic to handle different file types here
-          }
-          console.log(event, files);
-        }}
-      >
-        Upload
-      </FormFileUpload>
-      {/* Form Toggle */}
-      <FormToggle
-        checked={isChecked}
-        onChange={() => setChecked((state) => !state)}
-      />
-      {/* Form Token Field */}
-      <FormTokenField
-        __next40pxDefaultSize
-        value={selectedContinents}
-        suggestions={continents}
-        onChange={(tokens) => setSelectedContinents(tokens)}
-        __nextHasNoMarginBottom
-      />
-      {/* Guide */}
-      {/* <Guide
-        onFinish={() => setIsOpen(false)}
-        pages={[
-          {
-            content: <p>Welcome to the ACME Store!</p>,
-          },
-          {
-            image: <img src="https://images.unsplash.com/photo-1721332150382-d4114ee27eff?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8" />,
-            content: (
-              <p>
-                Click <i>Add to Cart</i> to buy a product.
-              </p>
-            ),
-          },
-        ]}
-      /> */}
-      {/* HStack */}
-      <HStack>
-        <Text>Code</Text>
-        <Text>is</Text>
-        <Text>Poetry</Text>
-      </HStack>
-      <HStack>
-        <Text>Code</Text>
-        <Spacer>
-          <Text>is</Text>
-        </Spacer>
-        <Text>Poetry</Text>
-      </HStack>
-      <HStack>
-        <Text>Code</Text>
-        <Spacer />
-        <Text>is</Text>
-        <Text>Poetry</Text>
-      </HStack>
-      {/* Heading */}
-      <Heading>Code is Poetry</Heading>;{/* Navigate Regions */}
-      <div>
-        <div role="region" tabIndex="-1" aria-label="Header">
-          Header
-        </div>
-        <div role="region" tabIndex="-1" aria-label="Content">
-          Content
-        </div>
-        <div role="region" tabIndex="-1" aria-label="Sidebar">
-          Sidebar
-        </div>
-      </div>
-      {/* Constrain  Tabbing */}
-      <div>
+      </small> */}
+        {/* Constrain  Tabbing */}
+        {/* <div>
         {form}
         <Button variant="secondary" onClick={toggleConstrain}>
           {isConstrainedTabbing ? "Disable" : "Enable"} constrain tabbing
         </Button>
-      </div>
-      {/* Fallback Styles */}
-      <div>
+      </div> */}
+        {/* Fallback Styles */}
+        {/* <div>
         <Button variant="primary">My button</Button>
         <div>Text color: {fallbackTextColor}</div>
         <div>Background color: {fallbackBackgroundColor}</div>
-      </div>
-      {/* Focus Return */}
-      <div>
+      </div> */}
+        {/* Focus Return */}
+        {/* <div>
         <TextControl
           __nextHasNoMarginBottom
           __next40pxDefaultSize
@@ -735,138 +437,88 @@ const General = ({
             Unmount
           </Button>
         )}
-      </div>
-      {/* Spoken Messages */}
-      <MyComponentWithSpokenMessages />
-      {/* Icon */}
-      <Icon icon={wordpress} />
-      {/* Modal */}
-      {/* <MyModal /> */}
-      {/* Item Group */}
-      <MyItemGroup />
-      {/* Keyboard Shortcuts */}
-      <MyKeyboardShortcut />
-      {/* Menu Group */}
-      <MyMenuGroup />
-      {/* Menu Item */}
-      <MyMenuItem />
-      {/* Menu Items Choice */}
-      <MyMenuItemsChoice />
-      {/* My Modal */}
-      <MyModal />
-      {/* Navigable Container */}
-      <MyNavigableContainer />
-      {/* My Navigation */}
-      <MyNavigation />
-      {/* My Navigator */}
-      {/* <MyNavigator /> */}
-      {/* My Notice */}
-      <MyNotice />
-      {/* My Number Control */}
-      <MyNumberControl />
-      {/* MY Panel */}
-      <MyPanel />
-      {/* My Placeholder */}
-      <MyPlaceholder />
-      {/* Popover */}
-      <MyPopover />
-      {/* Progress Bar */}
-      <MyLoadingComponent />
-      {/* Query Controls */}
-      <MyQueryControls />
-      {/* My Radio Contrl */}
-      <MyRadioControl />
-      {/* My Controlled Radio Group */}
-      <MyControlledRadioRadioGroup />
-      {/* My Range Control  */}
-      <MyRangeControl />
-      {/* ResizableBox */}
-      {/* <Edit /> */}
-      {/* Resize Tooltip */}
-      {/* <ResizeTooltip /> */}
-      {/* MyResponsiveWrapper */}
-      <MyResponsiveWrapper />
-      {/* MY Sand Box */}
-      <MySandBox />
-      {/* My Scroll Lock */}
-      <MyScrollLock />
-      {/* Search Control */}
-      <MySearchControl />
-      {/* Select Control */}
-      <MySelectControl />
-      {/* Slot fill */}
-      <MySlotFillProvider />
-      {/* Snack Bar Notice */}
-      <MySnackbarNotice />
-      {/* Spacer */}
-      <Example />
-      {/* Spiner */}
-      <MySpiner />
-      {/* Surface */}
-      <MySurface />
-      {/* Tab Panel */}
-      <MyTabPanel />
-      {/* Text Control */}
-      <MyTextControl />
-      {/*  Text Highlight */}
-      <MyTextHighlight />
-      {/* Textarea Control */}
-      <MyTextareaControl />
-      {/* Toggle Control */}
-      <MyToggleControl />
-      {/* Toggle Group Control Option Icon */}
-      <MyToggleGroupControlOptionIcon />
-      {/* Toggle Group Options */}
-      <MyToggleGroupControlOption />
-      {/* MY Toggle Group Control */}
-      <MyToggleGroupControl />
-      {/* My Toolbar */}
-      <MyToolbar />
-      {/* My Toolbar Dropdown menu */}
-      <MyToolbarDropdownMenu />
-      {/* My Toolbar Group */}
-      <MyToolbarGroup />
-      {/* Toolbar Item */}
-      <MyToolbarItem />
-      {/* My Toolbars */}
-      <MyToolbars />
-      {/* Dimension Panel */}
-      <DimensionPanel />
-      {/* Tooltip */}
-      <MyTooltip />
-      {/* Tree Grid */}
-      {/* <TreeMenu /> */}
-      {/* My Tree Select */}
-      <MyTreeSelect />
-      {/* Truncate */}
-      <MyTruncate />
-      {/* Unit Control */}
-      <MyUnitControl />
-      {/* Vertical Stack | VStack */}
-      <Spacer>
-        <VerticalStack />
-      </Spacer>
-      {/* file- MediaUpload and MediaUploadCheck */}
-      <Spacer>
-        <MediaUploader />
-      </Spacer>
-      {/* //! Most Useful Components Start */}
-      <MyUsefulTextControl />
-      {/* My Useful Textarea Control */}
-      <MyUsefulTextareaControl />
-      {/* My Useful Number Control */}
-      <MyUsefulNumberControl />
-      {/* My Useful Range Control */}
-      <MyUsefulRangeControl />
-      {/* MY Useful Toggle Control */}
-      <MyUsefulToggleControl />
-      {/* My Useful Custom Select Control */}
-      <MyUsefulCustomSelectControl />
-      {/* My Useful Controlled Custom Select Control */}
-      {/* <MyUsefulControlledCustomSelectControl /> */}
-      {/* My Useful Select Control */}
-      <MyUsefulSelectControl />
-    </PanelBody>
+      </div> */}
+        <p>
+          <strong>Select an Image:</strong>
+        </p>
+        <MediaUpload
+          onSelect={onSelectImage}
+          type="image"
+          value={attributes.image}
+          render={({ open }) => (
+            <IconButton
+              onClick={open}
+              icon="upload"
+              className="editor-media-placeholder_button is-button is-default is-large"
+            >
+              Select an Image
+            </IconButton>
+          )}
+        />
+        <Spacer />
+      </PanelBody>
+      <PanelBody
+        className="bPlPanelBody"
+        title={__("Product Price", "b-blocks")}
+        initialOpen={false}
+      >
+        <InputControl
+          label="Product Price"
+          labelPosition="top"
+          value={productPrice}
+          type="text"
+          isPressEnterToChange
+          onChange={(newPrice) => setAttributes({ productPrice: newPrice })}
+        />
+      </PanelBody>
+
+      <PanelBody
+        className="bPlPanelBody"
+        title={__("Title", "b-blocks")}
+        initialOpen={false}
+      >
+        <InputControl
+          label="Product Title"
+          labelPosition="top"
+          value={productTitle}
+          type="text"
+          isPressEnterToChange
+          onChange={(newTitle) => setAttributes({ productTitle: newTitle })}
+        />
+      </PanelBody>
+
+      <PanelBody
+        className="bPlPanelBody"
+        title={__("Product Description", "b-blocks")}
+        initialOpen={false}
+      >
+        <TextareaControl
+          label="Product Description"
+          rows={2}
+          value={productDescription}
+          onChange={(newDescription) =>
+            setAttributes({ productDescription: newDescription })
+          }
+        />
+      </PanelBody>
+
+      <PanelBody
+        className="bPlPanelBody"
+        title={__("Change Button Text", "b-blocks")}
+        initialOpen={false}
+      >
+        <InputControl
+          label="Button Name"
+          labelPosition="top"
+          value={buttonText}
+          type="text"
+          isPressEnterToChange
+          onChange={(newButtonText) =>
+            setAttributes({ buttonText: newButtonText })
+          }
+        />
+      </PanelBody>
+    </>
   );
 };
 

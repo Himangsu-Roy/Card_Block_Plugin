@@ -3,7 +3,7 @@
   "apiVersion": 3,
   "name": "b-blocks/test-purpose",
   "version": "1.0.0",
-  "title": "Tests",
+  "title": "Card",
   "category": "widgets",
   "description": "Short description of the Test Purpose",
   "keywords": [
@@ -25,6 +25,124 @@
         "color": "black",
         "bg": "#B1C5A4"
       }
+    },
+    "image": {
+      "type": "string",
+      "default": null
+    },
+    "buttonColor": {
+      "type": "string",
+      "default": "black"
+    },
+    "productPrice": {
+      "type": "string",
+      "default": "4.99"
+    },
+    "productTitle": {
+      "type": "string",
+      "default": "Morning Set"
+    },
+    "productDescription": {
+      "type": "string",
+      "default": "Set of coffee and chocolate cookies as a top tier among our customers and a perfect way to start your day"
+    },
+    "buttonText": {
+      "type": "string",
+      "default": "Buy Now"
+    },
+    "categoryButtons": {
+      "type": "array",
+      "default": [
+        {
+          "label": "sugar",
+          "value": "sugar"
+        },
+        {
+          "label": "vanilla aroma",
+          "value": "vanilla aroma"
+        },
+        {
+          "label": "cherry jam",
+          "value": "cherry jam"
+        }
+      ]
+    },
+    "categoryButtonColor": {
+      "type": "string",
+      "default": "#FFA500"
+    },
+    "width": {
+      "type": "string",
+      "default": "100%"
+    },
+    "widthUnit": {
+      "type": "string",
+      "default": "%"
+    },
+    "height": {
+      "type": "string",
+      "default": "200px"
+    },
+    "heightUnit": {
+      "type": "string",
+      "default": "%"
+    },
+    "borderRadius": {
+      "type": "object",
+      "default": {
+        "top": "0px",
+        "right": "0px",
+        "bottom": "0px",
+        "left": "0px"
+      }
+    },
+    "bgColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "padding": {
+      "type": "object",
+      "default": {
+        "top": "0px",
+        "right": "0px",
+        "bottom": "0px",
+        "left": "0px"
+      }
+    },
+    "margin": {
+      "type": "object",
+      "default": {
+        "top": "0px",
+        "right": "0px",
+        "bottom": "0px",
+        "left": "0px"
+      }
+    },
+    "boxShadow": {
+      "type": "object",
+      "default": {
+        "horizontal": "0px",
+        "vertical": "0px",
+        "blur": "10px",
+        "spread": "0px",
+        "color": "rgba(0, 0, 0, 0.1)"
+      }
+    },
+    "imageWidth": {
+      "type": "string",
+      "default": "100%"
+    },
+    "imageWidthUnit": {
+      "type": "string",
+      "default": "%"
+    },
+    "imageHeight": {
+      "type": "string",
+      "default": "200px"
+    },
+    "imageHeightUnit": {
+      "type": "string",
+      "default": "%"
     }
   },
   "supports": {

@@ -1,190 +1,131 @@
-import { useBlockProps } from "@wordpress/block-editor";
+import { useBlockProps, RichText } from "@wordpress/block-editor";
 
 import Settings from "./Settings/Settings";
 import Style from "../Common/Style";
-import MyUsefulTextControl from "../UsefulComponents/MyUsefulTextControl";
-import MyUsefulSelectControl from "../UsefulComponents/MyUsefulSelectControl";
-import genderOptions from "../UsefulComponents/utils/genderOptions";
-import MyUsefulFormFileUpload from "../UsefulComponents/MyUsefulFormFileUpload";
-import MyUsefulCheckboxControl from "../UsefulComponents/MyUsefulCheckboxControl";
-import MyUsefulButton from "../UsefulComponents/MyUsefulButton";
+import { Button } from "@wordpress/components";
+
 import {
-  __experimentalSpacer as Spacer,
-  Flex,
-  FlexItem,
-  FlexBlock,
-  ExternalLink,
+  Card,
+  CardHeader,
+  CardBody,
+  CardDivider,
+  CardMedia,
+  CardFooter,
+  ResponsiveWrapper,
+  __experimentalInputControl as InputControl,
+  FormTokenField,
+  Placeholder,
+  IconButton,
 } from "@wordpress/components";
-import image from "../UsefulComponents/utils/FormImage";
-import MyUsefulNumberControl from "../UsefulComponents/MyUsefulNumberControl";
-import MyUsefulDateTimePicker from "../UsefulComponents/MyUsefulDateTime";
-import MyUserNameTextControl from "../practiceForm/userName";
-import MyUserEmailTextControl from "../practiceForm/userEmail";
-import MyUserEmailControl from "../practiceForm/userEmail";
-import MyUserPasswordControl from "../practiceForm/userPassword";
-import MyUserSelectControl from "../practiceForm/userGender";
-import MyUserSkillsControls from "../practiceForm/userSkills";
-import MyUserAddressTextControl from "../practiceForm/userAddress";
-import UserPhoneControl from "../practiceForm/userPhone";
-import MyUserProfilePicControl from "../practiceForm/userProfilePic";
-import MyUserAgreeWithTermsCheckboxControl from "../practiceForm/agreeWithTerms";
-import UserAgeControl from "../practiceForm/userAge";
-import MyUserDateOfBirthPicker from "../practiceForm/userDateOfBirth";
-import UserFavoriteColor from "../practiceForm/userFavoriteColor";
-import MyUserBioTextareaControl from "../practiceForm/userBio";
-import MyUserProfilePageContainerWidth from "../practiceForm/profilePage/containerWidth";
-import MyUserProfilePagePadding from "../practiceForm/profilePage/padding";
-import MyUserProfilePageBorder from "../practiceForm/profilePage/border";
+import MyOptionsTokenField from "../options/options";
+import { MediaUpload } from "@wordpress/block-editor";
 
 const Edit = (props) => {
   const { attributes, setAttributes, clientId } = props;
-  const { purposeType } = attributes;
+  const categories = ["sugar", "vanilla aroma", "cherry jam"];
+
+  function onSelectImage(newImage) {
+    setAttributes({ image: newImage.sizes.full.url });
+  }
+
+  const { horizontal, vertical, blur, spread, color } = attributes.boxShadow;
 
   return (
     <>
       <Settings {...{ attributes, setAttributes }} />
-
       <div {...useBlockProps()}>
         <Style attributes={attributes} id={`block-${clientId}`} />
 
-        <div className="bBlocksTestPurpose">
-          {purposeType === "test" ? (
-            // <p>
-            // 	Every text is written for a reason. For example, every text message you send has a purpose, whether that is to let your mum know when you will be home.
-            // </p>
-            <>
-              {/* <img
-                src={image}
-                alt="Static image Example"
-                style={{ maxWidth: "100%" }}
-              /> */}
-              {/* Name
-              <Flex>
-                <FlexBlock>
-                  <MyUsefulTextControl
-                    label=""
-                    placeholder="First Name"
-                    type="text"
+        <div className="bBlocksCard">
+          <div
+            style={{
+              boxShadow: `${horizontal} ${vertical} ${blur} ${spread} ${color}`,
+            }}
+            className="card"
+          >
+            {attributes.image === null ? (
+              <Placeholder
+                icon="arrowDown"
+                label="Image"
+                instructions="Select an image to remove this placeholder"
+                isColumnLayout //element is flex if this is not used
+              >
+                <div
+                  style={{
+                    backgroundColor: "#e7e7e7",
+                    padding: "56px 64px",
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
+                  <MediaUpload
+                    onSelect={onSelectImage}
+                    type="image"
+                    value={attributes.image}
+                    render={({ open }) => (
+                      <IconButton
+                        onClick={open}
+                        icon="upload"
+                        className="editor-media-placeholder_button is-button is-default is-large"
+                      >
+                        Select an Image
+                      </IconButton>
+                    )}
                   />
-                </FlexBlock>
-                <FlexBlock>
-                  <MyUsefulTextControl
-                    label=""
-                    placeholder="Last Name"
-                    type="text"
-                  />
-                </FlexBlock>
-              </Flex>
-              Age
-              <MyUsefulTextControl label="" placeholder="ex:25" type="number" />
-              <MyUsefulNumberControl />
-              Date of Birth
-              <MyUsefulTextControl label="" placeholder="" type="date" />
-              <MyUsefulDateTimePicker />
-              Gender
-              <MyUsefulSelectControl label="" options={genderOptions} />
-              Email
-              <MyUsefulTextControl
-                label=""
-                placeholder="example@email.com"
-                type="email"
+                </div>
+              </Placeholder>
+            ) : (
+              <ResponsiveWrapper>
+                <img src={attributes.image} alt="WordPress" />
+              </ResponsiveWrapper>
+            )}
+
+            <RichText
+              key="editable"
+              tagName="p"
+              placeholder=""
+              value={attributes.productTitle}
+              onChange=""
+              className="title"
+            />
+
+            <RichText
+              key="editable"
+              tagName="p"
+              placeholder=""
+              value={attributes.productDescription}
+              onChange=""
+              className="description"
+            />
+            {/* <MyOptionsTokenField /> */}
+
+            {attributes.categoryButtons.map((category) => (
+              <Button
+                // style={{ backgroundColor: attributes.categoryButtonColor }}
+                className="categoryButtons"
+                key={category.value}
+              >
+                {category.value}
+              </Button>
+            ))}
+
+            <div className="bottom-components">
+              <RichText
+                key="editable"
+                tagName="p"
+                placeholder=""
+                value={`$${attributes.productPrice}`}
+                onChange=""
+                className="price"
               />
-              Address
-              <Flex>
-                <FlexBlock>
-                  <MyUsefulTextControl
-                    label=""
-                    placeholder="Street address"
-                    type="text"
-                  />
-                </FlexBlock>
-                <FlexBlock>
-                  <MyUsefulTextControl
-                    label=""
-                    placeholder="Street address line 2"
-                    type="text"
-                  />
-                </FlexBlock>
-              </Flex>
-              Phone
-              <Flex>
-                <FlexBlock>
-                  <MyUsefulTextControl
-                    label=""
-                    placeholder="Area code"
-                    type="number"
-                  />
-                </FlexBlock>
-                <FlexBlock>
-                  <MyUsefulTextControl
-                    label=""
-                    placeholder="Phone number"
-                    type="number"
-                  />
-                </FlexBlock>
-              </Flex>
-              <Flex>
-                <FlexBlock>
-                  Post/Zip code
-                  <MyUsefulTextControl
-                    label=""
-                    placeholder="ex:8976"
-                    type="number"
-                  />
-                </FlexBlock>
-                <FlexBlock>
-                  City
-                  <MyUsefulTextControl
-                    label=""
-                    placeholder="ex:New York"
-                    type="text"
-                  />
-                </FlexBlock>
-              </Flex>
-              <MyUsefulFormFileUpload />
-              <Spacer>
-                <Flex>
-                  <FlexBlock>
-                    <MyUsefulCheckboxControl />
-                  </FlexBlock>
-
-                  <label htmlFor="custom-text-control">
-                    I agree to the defined
-                    <ExternalLink
-                      href="https://example.com/help"
-                      style={{ marginLeft: "5px" }}
-                    >
-                      terms, conditions, and policies
-                    </ExternalLink>
-                  </label>
-                </Flex>
-              </Spacer>
-              <MyUsefulButton /> */}
-
-              <MyUserNameTextControl />
-              <MyUserEmailControl />
-              <MyUserPasswordControl />
-              <MyUserSelectControl options={genderOptions} />
-              <MyUserSkillsControls />
-              <MyUserAddressTextControl />
-              <UserPhoneControl />
-              <MyUserProfilePicControl />
-              <MyUserAgreeWithTermsCheckboxControl />
-              <UserAgeControl />
-              <MyUserDateOfBirthPicker />
-              <UserFavoriteColor />
-              <MyUserBioTextareaControl />
-              <MyUserProfilePageContainerWidth />
-              <MyUserProfilePagePadding />
-              <MyUserProfilePageBorder />
-            </>
-          ) : (
-            <p>
-              If someone sends you an invitation to a party, for example, they
-              are telling you what time to arrive and what the sender is
-              celebrating, and they might even.
-            </p>
-          )}
+              <Button
+                // style={{ backgroundColor: attributes.buttonColor }}
+                className="button"
+              >
+                {attributes.buttonText}
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </>

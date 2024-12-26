@@ -19,8 +19,13 @@ import {
   AnglePickerControl,
   Animate,
   Notice,
+  __experimentalUnitControl as UnitControl,
+  ColorPicker,
+  RangeControl,
+  TextControl,
 } from "@wordpress/components";
 import { useState } from "@wordpress/element";
+import { ColorPalette } from "@wordpress/editor";
 
 const colors = [{ name: "Blue 20", color: "#72aee6" }];
 
@@ -54,7 +59,7 @@ const fontSizes = [
 ];
 const fallbackFontSize = 16;
 
-const Style = () => {
+const Style = ({ attributes, setAttributes }) => {
   const [alignment, setAlignment] = useState("center center");
   const [angle, setAngle] = useState(0);
   const [border, setBorder] = useState();
@@ -64,6 +69,24 @@ const Style = () => {
     right: "10%",
     bottom: "50px",
   });
+
+  const {
+    buttonColor,
+    categoryButtonColor,
+    width,
+    height,
+    widthUnit,
+    heightUnit,
+    borderRadius,
+    bgColor,
+    padding,
+    margin,
+    boxShadow,
+    imageWidth,
+    imageHeight,
+    imageWidthUnit,
+    imageHeightUnit,
+  } = attributes;
 
   const [fontSize, setFontSize] = useState();
   const [filteredOptions, setFilteredOptions] = useState(options);
@@ -83,160 +106,202 @@ const Style = () => {
   });
   const onChange = (newBorders) => setBorders(newBorders);
 
-  const [focalPoint, setFocalPoint] = useState({
-    x: 0.5,
-    y: 0.5,
-  });
-
-  const url =
-    "https://images.unsplash.com/photo-1732058824460-d89cb7b4a38f?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
-
-  /* Example function to render the CSS styles based on Focal Point Picker value */
-  const style = {
-    backgroundImage: `url(${url})`,
-    backgroundPosition: `${focalPoint.x * 100}% ${focalPoint.y * 100}%`,
-  };
-
   // Font Size Picker
   const [fontSizePic, setFontSizePic] = useState(12);
-  // Gradient Picker
-  const [gradient, setGradient] = useState(null);
 
-  // console.log(fontSize)
-  // console.log(paddingSize)
-  // console.log(focalPoint)
-  console.log(fontSizePic);
-  // Gradient Picker
-  console.log(gradient);
+  function onButtonColorChange(newColor) {
+    setAttributes({ buttonColor: newColor });
+  }
+  function onCategorysButtonColorChange(newColor) {
+    setAttributes({ categoryButtonColor: newColor });
+  }
+
+  const updateBoxShadow = (key, value) => {
+    setAttributes({
+      boxShadow: {
+        ...boxShadow,
+        [key]: value,
+      },
+    });
+  };
 
   return (
     <>
       <PanelBody
         className="bPlPanelBody"
-        title={__("Purpose", "b-blocks")}
+        title={__("Button Color", "b-blocks")}
         initialOpen={false}
       >
-        <AlignmentMatrixControl
-          value={alignment}
-          onChange={(setAlignment) => console.log(setAlignment)}
+        <p>
+          <strong>Choose Your Button Color</strong>
+        </p>
+        <div style={{ marginTop: "20px", marginBottom: "40px" }}>
+          <ColorPalette
+            value={attributes.buttonColor}
+            onChange={onButtonColorChange}
+          />
+        </div>
+      </PanelBody>
+      <PanelBody
+        className="bPlPanelBody"
+        title={__("Category Background", "b-blocks")}
+        initialOpen={false}
+      >
+        <ColorPalette
+          value={attributes.categoryButtonColor}
+          onChange={onCategorysButtonColorChange}
         />
-        <AnglePickerControl
-          value={angle}
-          onChange={(setAngle) => console.log(setAngle)}
+      </PanelBody>
+      {/* Card Width Height */}
+      <PanelBody
+        className="bPlPanelBody"
+        title={__("Card Width and Height", "b-blocks")}
+        initialOpen={false}
+      >
+        <UnitControl
+          onChange={(newWidth) => setAttributes({ width: newWidth })}
+          onUnitChange={(newUnit) => setAttributes({ widthUnit: newUnit })}
+          label="Width"
+          isUnitSelectTabbable
+          value={`${width}${widthUnit}`}
         />
-        <Animate type="slide-in" options={{ origin: "top" }}>
-          {({ className }) => (
-            <Notice className={className} status="success">
-              <p>Animation finished.</p>
-            </Notice>
-          )}
-        </Animate>
-        {/* Border Box Control */}
-        <BorderBoxControl
-          __next40pxDefaultSize
-          color={colors}
-          label={__("Borders")}
-          onChange={onChange}
-          value={borders}
+        {/* <UnitControl
+          onChange={(newWidth) => setAttributes({ height: newWidth })}
+          onUnitChange={(newUnit) => setAttributes({ heightUnit: newUnit })}
+          label="Height"
+          isUnitSelectTabbable
+          value={`${height}${heightUnit}`}
+        /> */}
+      </PanelBody>
+      {/* Background width and Height */}
+      {/* <PanelBody
+        className="bPlPanelBody"
+        title={__("Background Width and Height", "b-blocks")}
+        initialOpen={false}
+      >
+        <UnitControl
+          onChange={(newWidth) => setAttributes({ width: newWidth })}
+          onUnitChange={(newUnit) => setAttributes({ widthUnit: newUnit })}
+          label="Width"
+          isUnitSelectTabbable
+          value={`${width}${widthUnit}`}
         />
-        {/* Border Control */}
-        <BorderControl
-          __next40pxDefaultSize
-          colors={colors}
-          label={__("Border")}
-          onChange={setBorder}
-          value={border}
+        <UnitControl
+          onChange={(newWidth) => setAttributes({ height: newWidth })}
+          onUnitChange={(newUnit) => setAttributes({ heightUnit: newUnit })}
+          label="Height"
+          isUnitSelectTabbable
+          value={`${height}${heightUnit}`}
         />
+      </PanelBody> */}
+      {/* Card Border Radius */}
+      <PanelBody
+        className="bPlPanelBody"
+        title={__("Border Radius", "b-blocks")}
+        initialOpen={false}
+      >
         <BoxControl
-          __next40pxDefaultSize
-          values={values}
-          onChange={setValues}
-        />
-        <ComboboxControl
-          __next40pxDefaultSize
-          __nextHasNoMarginBottom
-          label="Font Size"
-          value={fontSize}
-          onChange={setFontSize}
-          options={filteredOptions}
-          onFilterValueChange={(inputValue) =>
-            setFilteredOptions(
-              options.filter((option) => option.value === inputValue)
-            )
+          values={borderRadius}
+          onChange={(newValue) =>
+            setAttributes({
+              borderRadius: newValue,
+            })
           }
         />
-        <DimensionControl
-          __nextHasNoMarginBottom
-          __next40pxDefaultSize
-          label={"Padding"}
-          icon={"desktop"}
-          onChange={(value) => setPaddingSize(value)}
-          value={paddingSize}
+      </PanelBody>
+      {/* Bg Color */}
+      <PanelBody
+        className="bPlPanelBody"
+        title={__("Card Background Color", "b-blocks")}
+        initialOpen={false}
+      >
+        <ColorPicker
+          onChange={(newColor) => setAttributes({ bgColor: newColor })}
         />
-        <Flex>
-          <FlexItem>
-            <p>Code</p>
-            {/* <p>Code</p> */}
-          </FlexItem>
-          <FlexBlock>
-            <p>Poetry</p>
-            {/* <p>Poetry</p> */}
-          </FlexBlock>
-        </Flex>
-        <FocalPointPicker
-          __nextHasNoMarginBottom
-          url={url}
-          value={focalPoint}
-          onDragStart={setFocalPoint}
-          onDrag={setFocalPoint}
-          onChange={setFocalPoint}
+      </PanelBody>
+      {/* Padding and Margin */}
+      <PanelBody
+        className="bPlPanelBody"
+        title={__("Card Padding and Margin", "b-blocks")}
+        initialOpen={false}
+      >
+        <BoxControl
+          label="Padding"
+          values={padding}
+          onChange={(newPadding) => setAttributes({ padding: newPadding })}
         />
-        <div style={style} />
-        <FocusableIframe
-          src="/my-iframe-url"
-          onFocus={() => console.log("iframe is focused")}
+        <BoxControl
+          label="Margin"
+          values={margin}
+          onChange={(newMargin) => setAttributes({ margin: newMargin })}
         />
-        {/* Font Size Picker */}\
-        <FontSizePicker
-          __next40pxDefaultSize
-          fontSizes={fontSizes}
-          value={fontSizePic}
-          fallbackFontSize={fallbackFontSize}
-          onChange={(newFontSize) => {
-            setFontSizePic(newFontSize);
-          }}
+      </PanelBody>
+      {/* Box Shadow */}
+      <PanelBody
+        className="bPlPanelBody"
+        title={__("Box Shadow", "b-blocks")}
+        initialOpen={false}
+      >
+        <RangeControl
+          label="Horizontal Offset"
+          value={parseInt(boxShadow.horizontal, 10)}
+          onChange={(value) => updateBoxShadow("horizontal", `${value}px`)}
+          min={-50}
+          max={50}
         />
-        {/* Gradient Picker */}
-        <GradientPicker
-          value={gradient}
-          onChange={(currentGradient) => setGradient(currentGradient)}
-          gradients={[
-            {
-              name: "JShine",
-              gradient:
-                "linear-gradient(135deg,#12c2e9 0%,#c471ed 50%,#f64f59 100%)",
-              slug: "jshine",
-            },
-            {
-              name: "Moonlit Asteroid",
-              gradient:
-                "linear-gradient(135deg,#0F2027 0%, #203A43 0%, #2c5364 100%)",
-              slug: "moonlit-asteroid",
-            },
-            {
-              name: "Rastafarie",
-              gradient:
-                "linear-gradient(135deg,#1E9600 0%, #FFF200 0%, #FF0000 100%)",
-              slug: "rastafari",
-            },
-          ]}
+        <RangeControl
+          label="Vertical Offset"
+          value={parseInt(boxShadow.vertical, 10)}
+          onChange={(value) => updateBoxShadow("vertical", `${value}px`)}
+          min={-50}
+          max={50}
         />
-        {/* Grid */}
-        <Grid columns={2}>
-          <Text>Code</Text>
-          <Text>is</Text>
-          <Text>Poetry</Text>
-        </Grid>
+        <RangeControl
+          label="Blur Radius"
+          value={parseInt(boxShadow.blur, 10)}
+          onChange={(value) => updateBoxShadow("blur", `${value}px`)}
+          min={0}
+          max={50}
+        />
+        <RangeControl
+          label="Spread Radius"
+          value={parseInt(boxShadow.spread, 10)}
+          onChange={(value) => updateBoxShadow("spread", `${value}px`)}
+          min={-50}
+          max={50}
+        />
+        <TextControl
+          label="Shadow Color"
+          value={boxShadow.color}
+          onChange={(value) => updateBoxShadow("color", value)}
+        />
+      </PanelBody>
+      {/* Card Image Width Height */}
+      <PanelBody
+        className="bPlPanelBody"
+        title={__("Card Image Width and Height", "b-blocks")}
+        initialOpen={false}
+      >
+        <UnitControl
+          onChange={(newImageWidth) =>
+            setAttributes({ imageWidth: newImageWidth })
+          }
+          onUnitChange={(newUnit) => setAttributes({ widthUnit: newUnit })}
+          label="Width"
+          isUnitSelectTabbable
+          value={`${imageWidth}${imageWidthUnit}`}
+        />
+        <UnitControl
+          onChange={(newImageHeight) =>
+            setAttributes({ imageHeight: newImageHeight })
+          }
+          onUnitChange={(newUnit) =>
+            setAttributes({ imageHeightUnit: newUnit })
+          }
+          label="Height"
+          isUnitSelectTabbable
+          value={`${imageHeight}${imageHeightUnit}`}
+        />
       </PanelBody>
     </>
   );
