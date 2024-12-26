@@ -6,7 +6,7 @@
   "title": "Card",
   "category": "widgets",
   "description": "Short description of the Test Purpose",
-  "keywords": ["Test Purpose"],
+  "keywords": ["Card", "Product Card", "Product"],
   "textdomain": "b-blocks",
   "attributes": {
     "alignment": {
@@ -65,10 +65,7 @@
         }
       ]
     },
-    "categoryButtonColor": {
-      "type": "string",
-      "default": "#FFA500"
-    },
+
     "width": {
       "type": "string",
       "default": "100%"
@@ -180,36 +177,40 @@
       "type": "string",
       "default": "Arial, sans-serif"
     },
-
-    "categoryBackgroundColor": {
-      "type": "string",
-      "default": "#FFFFFF"
-    },
-    "categoryFontSize": {
-      "type": "string",
-      "default": "16px"
-    },
-    "categoryFontWeight": {
-      "type": "string",
-      "default": "400"
-    },
-    "categoryLineHeight": {
-      "type": "string",
-      "default": "1.5"
-    },
-    "categoryLetterSpacing": {
-      "type": "string",
-      "default": "0px"
-    },
-    "categoryFontFamily": {
-      "type": "string",
-      "default": "Arial, sans-serif"
-    },
-    "categoryTextAlign": {
+    "textAlign": {
       "type": "string",
       "default": "left"
     },
-    "categoryMargin": {
+
+    "categoryButtonBackgroundColor": {
+      "type": "string",
+      "default": "#FFFFFF"
+    },
+    "categoryButtonColor": {
+      "type": "string",
+      "default": "#FFA500"
+    },
+    "categoryButtonFontSize": {
+      "type": "string",
+      "default": "16px"
+    },
+    "categoryButtonFontWeight": {
+      "type": "string",
+      "default": "400"
+    },
+    "categoryButtonLineHeight": {
+      "type": "string",
+      "default": "1.5"
+    },
+    "categoryButtonLetterSpacing": {
+      "type": "string",
+      "default": "0px"
+    },
+    "categoryButtonFontFamily": {
+      "type": "string",
+      "default": "Arial, sans-serif"
+    },
+    "categoryButtonMargin": {
       "type": "object",
       "default": {
         "top": "0px",
@@ -218,7 +219,7 @@
         "left": "0px"
       }
     },
-    "categoryPadding": {
+    "categoryButtonPadding": {
       "type": "object",
       "default": {
         "top": "0px",
