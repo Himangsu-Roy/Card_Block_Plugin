@@ -2593,6 +2593,12 @@ const Edit = props => {
     spread,
     color
   } = attributes.boxShadow;
+  const {
+    imageBorderWidth,
+    imageBorderStyle,
+    imageBorderColor,
+    imageBorderRadius
+  } = attributes;
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Settings_Settings__WEBPACK_IMPORTED_MODULE_2__["default"], {
     attributes,
     setAttributes
@@ -2612,7 +2618,7 @@ const Edit = props => {
     icon: "arrowDown",
     label: "Image",
     instructions: "Select an image to remove this placeholder",
-    isColumnLayout: true //element is flex if this is not used
+    isColumnLayout: true
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     style: {
       backgroundColor: "#e7e7e7",
@@ -2632,6 +2638,10 @@ const Edit = props => {
       className: "editor-media-placeholder_button is-button is-default is-large"
     }, "Select an Image")
   }))) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ResponsiveWrapper, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    style: {
+      border: `${imageBorderWidth} ${imageBorderStyle} ${imageBorderColor}`,
+      borderRadius: `${imageBorderRadius}`
+    },
     src: attributes.image,
     alt: "WordPress"
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
@@ -3242,6 +3252,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/editor */ "@wordpress/editor");
 /* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_editor__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _Typography_TypographyControl__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../Typography/TypographyControl */ "./src/Components/Typography/TypographyControl.js");
+
 
 
 
@@ -3301,7 +3313,11 @@ const Style = ({
     imageWidth,
     imageHeight,
     imageWidthUnit,
-    imageHeightUnit
+    imageHeightUnit,
+    imageBorderStyle,
+    imageBorderWidth,
+    imageBorderColor,
+    imageBorderRadius
   } = attributes;
   const [fontSize, setFontSize] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)();
   const [filteredOptions, setFilteredOptions] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(options);
@@ -3461,6 +3477,77 @@ const Style = ({
     label: "Height",
     isUnitSelectTabbable: true,
     value: `${imageHeight}${imageHeightUnit}`
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    className: "bPlPanelBody",
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Image Border Style", "b-blocks"),
+    initialOpen: false
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Style", "b-blocks"),
+    value: imageBorderStyle,
+    options: [{
+      label: "Solid",
+      value: "solid"
+    }, {
+      label: "Dashed",
+      value: "dashed"
+    }, {
+      label: "Dotted",
+      value: "dotted"
+    }, {
+      label: "Double",
+      value: "double"
+    }, {
+      label: "None",
+      value: "none"
+    }],
+    onChange: newStyle => setAttributes({
+      imageBorderStyle: newStyle
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalUnitControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Width", "b-blocks"),
+    value: imageBorderWidth,
+    onChange: newWidth => setAttributes({
+      imageBorderWidth: newWidth
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPicker, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Color", "b-blocks"),
+    color: imageBorderColor,
+    onChange: newColor => setAttributes({
+      imageBorderColor: newColor
+    }),
+    enableAlpha: true
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalUnitControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Radius", "b-blocks"),
+    value: imageBorderRadius,
+    onChange: newRadius => setAttributes({
+      imageBorderRadius: newRadius
+    })
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    className: "bPlPanelBody",
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Title Typography", "b-blocks"),
+    initialOpen: false
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Typography_TypographyControl__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    attributes: attributes,
+    setAttributes: setAttributes
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    className: "bPlPanelBody",
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Category Buttons Style", "b-blocks"),
+    initialOpen: false
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalBoxControl, {
+    label: "Padding",
+    values: padding,
+    onChange: newPadding => setAttributes({
+      padding: newPadding
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalBoxControl, {
+    label: "Margin",
+    values: margin,
+    onChange: newMargin => setAttributes({
+      margin: newMargin
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Typography_TypographyControl__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    attributes: attributes,
+    setAttributes: setAttributes
   })));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Style);
@@ -3493,6 +3580,9 @@ const Style = ({
   const card = `${mainSl} .card `;
   const cardImageWidth = `${card} img`;
   const cardImageHeight = `${card} img`;
+  const cardTitle = `${card} .title`;
+  const categoriesButtons = `${card} .category-buttons`;
+  const cardImageBorderStyle = `${card} .components-responsive-wrapper__content img`;
   const cardShadow = `${mainSl} .card `;
   const cardWidth = `${mainSl} .card `;
   const cardHeight = `${cardWidth} .card `;
@@ -3512,7 +3602,15 @@ const Style = ({
   //    background: ${buttonColor}
   // }
 
-  console.log("shadow value", attributes.imageWidth);
+  console.log("border value", attributes.imageBorderStyle, attributes.imageBorderWidth, attributes.imageBorderColor, attributes.imageBorderRadius);
+  const {
+    fontSize,
+    fontWeight,
+    lineHeight,
+    letterSpacing,
+    fontFamily
+  } = attributes;
+  console.log(fontFamily, fontWeight, "font");
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("style", {
     dangerouslySetInnerHTML: {
       __html: `
@@ -3551,7 +3649,24 @@ const Style = ({
         margin: ${attributes.margin.top} ${attributes.margin.right} ${attributes.margin.bottom} ${attributes.margin.left}
         }
         ${cardShadow} {
-         box-shadow: ${attributes.boxShadow.horizontal} ${attributes.boxShadow.vertical} ${attributes.boxShadow.blur} ${attributes.boxShadow.spread} ${attributes.boxShadow.color},
+         box-shadow: ${attributes.boxShadow.horizontal} ${attributes.boxShadow.vertical} ${attributes.boxShadow.blur} ${attributes.boxShadow.spread} ${attributes.boxShadow.color}
+        }
+        ${cardImageBorderStyle} {
+         border: ${attributes.imageBorderWidth} ${attributes.imageBorderStyle} ${attributes.imageBorderColor};
+         border-radius: ${attributes.imageBorderRadius};
+        }
+        ${cardTitle} {
+         font-size: ${fontSize};
+          font-weight: ${fontWeight};
+          line-height: ${lineHeight};
+          letter-spacing: ${letterSpacing};
+          font-family: ${fontFamily};
+         
+        }
+
+
+        ${categoriesButtons}{
+        
         }
  
 	`
@@ -3559,6 +3674,97 @@ const Style = ({
   });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Style);
+
+/***/ }),
+
+/***/ "./src/Components/Typography/TypographyControl.js":
+/*!********************************************************!*\
+  !*** ./src/Components/Typography/TypographyControl.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ TypographyControl)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+function TypographyControl({
+  attributes,
+  setAttributes
+}) {
+  const {
+    fontSize,
+    fontWeight,
+    lineHeight,
+    letterSpacing,
+    fontFamily
+  } = attributes;
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Typography Settings", "text-domain"),
+    initialOpen: true
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.FontSizePicker, {
+    value: fontSize,
+    onChange: newSize => setAttributes({
+      fontSize: newSize
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Weight", "text-domain"),
+    value: fontWeight,
+    options: [{
+      label: "Normal",
+      value: "400"
+    }, {
+      label: "Bold",
+      value: "700"
+    }, {
+      label: "Light",
+      value: "300"
+    }],
+    onChange: newWeight => setAttributes({
+      fontWeight: newWeight
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalUnitControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Line Height", "text-domain"),
+    value: lineHeight,
+    onChange: newLineHeight => setAttributes({
+      lineHeight: newLineHeight
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalUnitControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Letter Spacing", "text-domain"),
+    value: letterSpacing,
+    onChange: newLetterSpacing => setAttributes({
+      letterSpacing: newLetterSpacing
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Family", "text-domain"),
+    value: fontFamily,
+    options: [{
+      label: "Arial",
+      value: "Arial, sans-serif"
+    }, {
+      label: "Georgia",
+      value: "Georgia, serif"
+    }, {
+      label: "Times New Roman",
+      value: '"Times New Roman", serif'
+    }, {
+      label: "Courier New",
+      value: '"Courier New", monospace'
+    }],
+    onChange: newFamily => setAttributes({
+      fontFamily: newFamily
+    })
+  }));
+}
 
 /***/ }),
 
@@ -11532,7 +11738,7 @@ function combine (array, callback) {
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"b-blocks/test-purpose","version":"1.0.0","title":"Card","category":"widgets","description":"Short description of the Test Purpose","keywords":["Test Purpose"],"textdomain":"b-blocks","attributes":{"alignment":{"type":"string","default":"center"},"purposeType":{"type":"string","default":"test"},"colors":{"type":"object","default":{"color":"black","bg":"#B1C5A4"}},"image":{"type":"string","default":null},"buttonColor":{"type":"string","default":"black"},"productPrice":{"type":"string","default":"4.99"},"productTitle":{"type":"string","default":"Morning Set"},"productDescription":{"type":"string","default":"Set of coffee and chocolate cookies as a top tier among our customers and a perfect way to start your day"},"buttonText":{"type":"string","default":"Buy Now"},"categoryButtons":{"type":"array","default":[{"label":"sugar","value":"sugar"},{"label":"vanilla aroma","value":"vanilla aroma"},{"label":"cherry jam","value":"cherry jam"}]},"categoryButtonColor":{"type":"string","default":"#FFA500"},"width":{"type":"string","default":"100%"},"widthUnit":{"type":"string","default":"%"},"height":{"type":"string","default":"200px"},"heightUnit":{"type":"string","default":"%"},"borderRadius":{"type":"object","default":{"top":"0px","right":"0px","bottom":"0px","left":"0px"}},"bgColor":{"type":"string","default":"#ffffff"},"padding":{"type":"object","default":{"top":"0px","right":"0px","bottom":"0px","left":"0px"}},"margin":{"type":"object","default":{"top":"0px","right":"0px","bottom":"0px","left":"0px"}},"boxShadow":{"type":"object","default":{"horizontal":"0px","vertical":"0px","blur":"10px","spread":"0px","color":"rgba(0, 0, 0, 0.1)"}},"imageWidth":{"type":"string","default":"100%"},"imageWidthUnit":{"type":"string","default":"%"},"imageHeight":{"type":"string","default":"200px"},"imageHeightUnit":{"type":"string","default":"%"}},"supports":{"align":["wide","full"],"html":false},"example":{"attributes":{}},"editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./view.css","render":"file:./render.php","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"b-blocks/test-purpose","version":"1.0.0","title":"Card","category":"widgets","description":"Short description of the Test Purpose","keywords":["Test Purpose"],"textdomain":"b-blocks","attributes":{"alignment":{"type":"string","default":"center"},"purposeType":{"type":"string","default":"test"},"colors":{"type":"object","default":{"color":"black","bg":"#B1C5A4"}},"image":{"type":"string","default":null},"buttonColor":{"type":"string","default":"black"},"productPrice":{"type":"string","default":"4.99"},"productTitle":{"type":"string","default":"Morning Set"},"productDescription":{"type":"string","default":"Set of coffee and chocolate cookies as a top tier among our customers and a perfect way to start your day"},"buttonText":{"type":"string","default":"Buy Now"},"categoryButtons":{"type":"array","default":[{"label":"sugar","value":"sugar"},{"label":"vanilla aroma","value":"vanilla aroma"},{"label":"cherry jam","value":"cherry jam"}]},"categoryButtonColor":{"type":"string","default":"#FFA500"},"width":{"type":"string","default":"100%"},"widthUnit":{"type":"string","default":"%"},"height":{"type":"string","default":"200px"},"heightUnit":{"type":"string","default":"%"},"borderRadius":{"type":"object","default":{"top":"0px","right":"0px","bottom":"0px","left":"0px"}},"bgColor":{"type":"string","default":"#ffffff"},"padding":{"type":"object","default":{"top":"0px","right":"0px","bottom":"0px","left":"0px"}},"margin":{"type":"object","default":{"top":"0px","right":"0px","bottom":"0px","left":"0px"}},"boxShadow":{"type":"object","default":{"horizontal":"0px","vertical":"0px","blur":"10px","spread":"0px","color":"rgba(0, 0, 0, 0.1)"}},"imageWidth":{"type":"string","default":"100%"},"imageWidthUnit":{"type":"string","default":"%"},"imageHeight":{"type":"string","default":"200px"},"imageHeightUnit":{"type":"string","default":"%"},"imageBorderStyle":{"type":"string","default":"solid"},"imageBorderWidth":{"type":"string","default":"2px"},"imageBorderColor":{"type":"string","default":"#333"},"imageBorderRadius":{"type":"string","default":"5px"},"fontSize":{"type":"string","default":"16px"},"fontWeight":{"type":"string","default":"400"},"lineHeight":{"type":"string","default":"1.5"},"letterSpacing":{"type":"string","default":"0px"},"fontFamily":{"type":"string","default":"Arial, sans-serif"},"categoryBackgroundColor":{"type":"string","default":"#FFFFFF"},"categoryFontSize":{"type":"string","default":"16px"},"categoryFontWeight":{"type":"string","default":"400"},"categoryLineHeight":{"type":"string","default":"1.5"},"categoryLetterSpacing":{"type":"string","default":"0px"},"categoryFontFamily":{"type":"string","default":"Arial, sans-serif"},"categoryTextAlign":{"type":"string","default":"left"},"categoryMargin":{"type":"string","default":"0px"},"categoryPadding":{"type":"string","default":"0px"}},"supports":{"align":["wide","full"],"html":false},"example":{"attributes":{}},"editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./view.css","render":"file:./render.php","viewScript":"file:./view.js"}');
 
 /***/ })
 

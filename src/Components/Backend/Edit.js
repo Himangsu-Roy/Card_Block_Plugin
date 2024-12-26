@@ -29,6 +29,12 @@ const Edit = (props) => {
   }
 
   const { horizontal, vertical, blur, spread, color } = attributes.boxShadow;
+  const {
+    imageBorderWidth,
+    imageBorderStyle,
+    imageBorderColor,
+    imageBorderRadius,
+  } = attributes;
 
   return (
     <>
@@ -48,7 +54,7 @@ const Edit = (props) => {
                 icon="arrowDown"
                 label="Image"
                 instructions="Select an image to remove this placeholder"
-                isColumnLayout //element is flex if this is not used
+                isColumnLayout
               >
                 <div
                   style={{
@@ -76,7 +82,14 @@ const Edit = (props) => {
               </Placeholder>
             ) : (
               <ResponsiveWrapper>
-                <img src={attributes.image} alt="WordPress" />
+                <img
+                  style={{
+                    border: `${imageBorderWidth} ${imageBorderStyle} ${imageBorderColor}`,
+                    borderRadius: `${imageBorderRadius}`,
+                  }}
+                  src={attributes.image}
+                  alt="WordPress"
+                />
               </ResponsiveWrapper>
             )}
 

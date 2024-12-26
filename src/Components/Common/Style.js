@@ -6,6 +6,9 @@ const Style = ({ attributes, id }) => {
   const card = `${mainSl} .card `;
   const cardImageWidth = `${card} img`;
   const cardImageHeight = `${card} img`;
+  const cardTitle = `${card} .title`;
+  const categoriesButtons = `${card} .category-buttons`;
+  const cardImageBorderStyle = `${card} .components-responsive-wrapper__content img`;
   const cardShadow = `${mainSl} .card `;
   const cardWidth = `${mainSl} .card `;
   const cardHeight = `${cardWidth} .card `;
@@ -25,7 +28,17 @@ const Style = ({ attributes, id }) => {
   //    background: ${buttonColor}
   // }
 
-  console.log("shadow value", attributes.imageWidth);
+  console.log(
+    "border value",
+    attributes.imageBorderStyle,
+    attributes.imageBorderWidth,
+    attributes.imageBorderColor,
+    attributes.imageBorderRadius
+  );
+
+  const { fontSize, fontWeight, lineHeight, letterSpacing, fontFamily } =
+    attributes;
+  console.log(fontFamily, fontWeight, "font");
 
   return (
     <style
@@ -66,7 +79,24 @@ const Style = ({ attributes, id }) => {
         margin: ${attributes.margin.top} ${attributes.margin.right} ${attributes.margin.bottom} ${attributes.margin.left}
         }
         ${cardShadow} {
-         box-shadow: ${attributes.boxShadow.horizontal} ${attributes.boxShadow.vertical} ${attributes.boxShadow.blur} ${attributes.boxShadow.spread} ${attributes.boxShadow.color},
+         box-shadow: ${attributes.boxShadow.horizontal} ${attributes.boxShadow.vertical} ${attributes.boxShadow.blur} ${attributes.boxShadow.spread} ${attributes.boxShadow.color}
+        }
+        ${cardImageBorderStyle} {
+         border: ${attributes.imageBorderWidth} ${attributes.imageBorderStyle} ${attributes.imageBorderColor};
+         border-radius: ${attributes.imageBorderRadius};
+        }
+        ${cardTitle} {
+         font-size: ${fontSize};
+          font-weight: ${fontWeight};
+          line-height: ${lineHeight};
+          letter-spacing: ${letterSpacing};
+          font-family: ${fontFamily};
+         
+        }
+
+
+        ${categoriesButtons}{
+        
         }
  
 	`,

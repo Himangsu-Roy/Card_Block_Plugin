@@ -23,9 +23,11 @@ import {
   ColorPicker,
   RangeControl,
   TextControl,
+  SelectControl,
 } from "@wordpress/components";
 import { useState } from "@wordpress/element";
 import { ColorPalette } from "@wordpress/editor";
+import TypographyControl from "../../../Typography/TypographyControl";
 
 const colors = [{ name: "Blue 20", color: "#72aee6" }];
 
@@ -86,6 +88,10 @@ const Style = ({ attributes, setAttributes }) => {
     imageHeight,
     imageWidthUnit,
     imageHeightUnit,
+    imageBorderStyle,
+    imageBorderWidth,
+    imageBorderColor,
+    imageBorderRadius,
   } = attributes;
 
   const [fontSize, setFontSize] = useState();
@@ -301,6 +307,82 @@ const Style = ({ attributes, setAttributes }) => {
           label="Height"
           isUnitSelectTabbable
           value={`${imageHeight}${imageHeightUnit}`}
+        />
+      </PanelBody>
+
+      {/* Border Style Control */}
+      <PanelBody
+        className="bPlPanelBody"
+        title={__("Image Border Style", "b-blocks")}
+        initialOpen={false}
+      >
+        <SelectControl
+          label={__("Border Style", "b-blocks")}
+          value={imageBorderStyle}
+          options={[
+            { label: "Solid", value: "solid" },
+            { label: "Dashed", value: "dashed" },
+            { label: "Dotted", value: "dotted" },
+            { label: "Double", value: "double" },
+            { label: "None", value: "none" },
+          ]}
+          onChange={(newStyle) => setAttributes({ imageBorderStyle: newStyle })}
+        />
+
+        {/* Border Width Control */}
+        <UnitControl
+          label={__("Border Width", "b-blocks")}
+          value={imageBorderWidth}
+          onChange={(newWidth) => setAttributes({ imageBorderWidth: newWidth })}
+        />
+
+        {/* Border Color Control */}
+        <ColorPicker
+          label={__("Border Color", "b-blocks")}
+          color={imageBorderColor}
+          onChange={(newColor) => setAttributes({ imageBorderColor: newColor })}
+          enableAlpha
+        />
+
+        {/* Border Radius Control */}
+        <UnitControl
+          label={__("Border Radius", "b-blocks")}
+          value={imageBorderRadius}
+          onChange={(newRadius) =>
+            setAttributes({ imageBorderRadius: newRadius })
+          }
+        />
+      </PanelBody>
+      <PanelBody
+        className="bPlPanelBody"
+        title={__("Title Typography", "b-blocks")}
+        initialOpen={false}
+      >
+        <TypographyControl
+          attributes={attributes}
+          setAttributes={setAttributes}
+        />
+      </PanelBody>
+
+      {/* Category Buttons */}
+      <PanelBody
+        className="bPlPanelBody"
+        title={__("Category Buttons Style", "b-blocks")}
+        initialOpen={false}
+      >
+        <BoxControl
+          label="Padding"
+          values={padding}
+          onChange={(newPadding) => setAttributes({ padding: newPadding })}
+        />
+        <BoxControl
+          label="Margin"
+          values={margin}
+          onChange={(newMargin) => setAttributes({ margin: newMargin })}
+        />
+        <TypographyControl
+          attributes={attributes}
+          setAttributes={setAttributes}
         />
       </PanelBody>
     </>

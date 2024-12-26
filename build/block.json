@@ -143,6 +143,78 @@
     "imageHeightUnit": {
       "type": "string",
       "default": "%"
+    },
+    "imageBorderStyle": {
+      "type": "string",
+      "default": "solid"
+    },
+    "imageBorderWidth": {
+      "type": "string",
+      "default": "2px"
+    },
+    "imageBorderColor": {
+      "type": "string",
+      "default": "#333"
+    },
+    "imageBorderRadius": {
+      "type": "string",
+      "default": "5px"
+    },
+    "fontSize": {
+      "type": "string",
+      "default": "16px"
+    },
+    "fontWeight": {
+      "type": "string",
+      "default": "400"
+    },
+    "lineHeight": {
+      "type": "string",
+      "default": "1.5"
+    },
+    "letterSpacing": {
+      "type": "string",
+      "default": "0px"
+    },
+    "fontFamily": {
+      "type": "string",
+      "default": "Arial, sans-serif"
+    },
+    "categoryBackgroundColor": {
+      "type": "string",
+      "default": "#FFFFFF"
+    },
+    "categoryFontSize": {
+      "type": "string",
+      "default": "16px"
+    },
+    "categoryFontWeight": {
+      "type": "string",
+      "default": "400"
+    },
+    "categoryLineHeight": {
+      "type": "string",
+      "default": "1.5"
+    },
+    "categoryLetterSpacing": {
+      "type": "string",
+      "default": "0px"
+    },
+    "categoryFontFamily": {
+      "type": "string",
+      "default": "Arial, sans-serif"
+    },
+    "categoryTextAlign": {
+      "type": "string",
+      "default": "left"
+    },
+    "categoryMargin": {
+      "type": "string",
+      "default": "0px"
+    },
+    "categoryPadding": {
+      "type": "string",
+      "default": "0px"
     }
   },
   "supports": {
