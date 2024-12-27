@@ -28,9 +28,36 @@ const Style = ({ attributes, id }) => {
   //    background: ${buttonColor}
   // }
 
-  const { fontSize, fontWeight, lineHeight, letterSpacing, fontFamily } =
-    attributes;
-  
+  const {
+    fontSize,
+    fontWeight,
+    lineHeight,
+    letterSpacing,
+    fontFamily,
+    categoryBackgroundColor,
+    categoryButtoncolor,
+    categoryButtonFontSize,
+    categoryButtonFontWeight,
+    categoryButtonLineHeight,
+    categoryButtonLetterSpacing,
+    categoryButtonFontFamily,
+    categoryButtonMargin,
+    categoryButtonPadding,
+    categoryButtonRadius,
+  } = attributes;
+
+  console.log(
+    categoryBackgroundColor,
+    categoryButtoncolor,
+    categoryButtonFontSize,
+    categoryButtonFontWeight,
+    categoryButtonLineHeight,
+    categoryButtonLetterSpacing,
+    categoryButtonFontFamily,
+    categoryButtonMargin,
+    categoryButtonPadding,
+    categoryButtonRadius
+  );
 
   return (
     <style
@@ -83,12 +110,21 @@ const Style = ({ attributes, id }) => {
           line-height: ${lineHeight};
           letter-spacing: ${letterSpacing};
           font-family: ${fontFamily};
-         
         }
 
-
         ${categoriesButtons}{
-        
+        backgrouond-color: ${categoryBackgroundColor};
+        color: ${categoryButtoncolor};
+        font-size: ${categoryButtonFontSize};
+        font-weight: ${categoryButtonFontWeight};
+        line-height: ${categoryButtonLineHeight};
+        letter-spacing: ${categoryButtonLetterSpacing};
+        font-family: ${categoryButtonFontFamily};
+        margin: ${categoryButtonMargin};
+        padding: ${categoryButtonPadding};
+        border-radius: ${categoryButtonRadius};
+
+
         }
  
 	`,

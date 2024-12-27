@@ -3,7 +3,7 @@ import { useBlockProps, RichText } from "@wordpress/block-editor";
 import Settings from "./Settings/Settings";
 import Style from "../Common/Style";
 import { Button } from "@wordpress/components";
- 
+
 import {
   Card,
   CardHeader,
@@ -19,6 +19,7 @@ import {
 } from "@wordpress/components";
 import MyOptionsTokenField from "../options/options";
 import { MediaUpload } from "@wordpress/block-editor";
+import ButtonControl from "../Button/ButtonControl";
 
 const Edit = (props) => {
   const { attributes, setAttributes, clientId } = props;
@@ -35,6 +36,49 @@ const Edit = (props) => {
     imageBorderColor,
     imageBorderRadius,
   } = attributes;
+
+  const mapAttributesToProps = (attributes) => ({
+    backgroundColor: attributes.categoryBackgroundColor,
+    color: attributes.categoryButtoncolor,
+    fontSize: attributes.categoryButtonFontSize,
+    fontWeight: attributes.categoryButtonFontWeight,
+    lineHeight: attributes.categoryButtonLineHeight,
+    letterSpacing: attributes.categoryButtonLetterSpacing,
+    fontFamily: attributes.categoryButtonFontFamily,
+    margin: attributes.categoryButtonMargin,
+    padding: attributes.categoryButtonPadding,
+    borderRadius: attributes.categoryButtonRadius,
+  });
+
+  const categoryAttributes = {
+    categoryBackgroundColor: "#FFFFFF",
+    categoryButtoncolor: "#FFA500",
+    categoryButtonFontSize: "16px",
+    categoryButtonFontWeight: "400",
+    categoryButtonLineHeight: "1.5",
+    categoryButtonLetterSpacing: "0px",
+    categoryButtonFontFamily: "Arial, sans-serif",
+    categoryButtonMargin: {
+      top: "0px",
+      right: "0px",
+      bottom: "0px",
+      left: "0px",
+    },
+    categoryButtonPadding: {
+      top: "0px",
+      right: "0px",
+      bottom: "0px",
+      left: "0px",
+    },
+    categoryButtonRadius: {
+      top: "5px",
+      right: "5px",
+      bottom: "5px",
+      left: "5px",
+    },
+  };
+
+  const buttonProps = mapAttributesToProps(categoryAttributes);
 
   return (
     <>
@@ -137,6 +181,7 @@ const Edit = (props) => {
               >
                 {attributes.buttonText}
               </Button>
+              <ButtonControl {...buttonProps}>Button</ButtonControl>
             </div>
           </div>
         </div>

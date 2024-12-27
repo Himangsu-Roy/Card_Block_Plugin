@@ -92,7 +92,30 @@ const Style = ({ attributes, setAttributes }) => {
     imageBorderWidth,
     imageBorderColor,
     imageBorderRadius,
+    categoryBackgroundColor,
+    categoryButtoncolor,
+    categoryButtonFontSize,
+    categoryButtonFontWeight,
+    categoryButtonLineHeight,
+    categoryButtonLetterSpacing,
+    categoryButtonFontFamily,
+    categoryButtonMargin,
+    categoryButtonPadding,
+    categoryButtonRadius,
   } = attributes;
+
+  console.log(
+    categoryBackgroundColor,
+    categoryButtoncolor,
+    categoryButtonFontSize,
+    categoryButtonFontWeight,
+    categoryButtonLineHeight,
+    categoryButtonLetterSpacing,
+    categoryButtonFontFamily,
+    categoryButtonMargin,
+    categoryButtonPadding,
+    categoryButtonRadius
+  );
 
   const [fontSize, setFontSize] = useState();
   const [filteredOptions, setFilteredOptions] = useState(options);
@@ -365,7 +388,7 @@ const Style = ({ attributes, setAttributes }) => {
       </PanelBody>
 
       {/* Category Buttons */}
-      <PanelBody
+      {/* <PanelBody
         className="bPlPanelBody"
         title={__("Category Buttons Style", "b-blocks")}
         initialOpen={false}
@@ -384,7 +407,7 @@ const Style = ({ attributes, setAttributes }) => {
           attributes={attributes}
           setAttributes={setAttributes}
         />
-      </PanelBody>
+      </PanelBody> */}
 
       {/* Category Button Styles */}
       <PanelBody
@@ -397,49 +420,70 @@ const Style = ({ attributes, setAttributes }) => {
         </p>
         <ColorPicker
           label={__("Background Color", "b-blocks")}
-          color={attributes.backgroundColor}
-          onChange={(value) => setAttributes({ backgroundColor: value })}
+          color={categoryBackgroundColor}
+          onChange={(value) =>
+            setAttributes({ categoryBackgroundColor: value })
+          }
         />
         <p>
           <strong>Text Color</strong>
         </p>
         <ColorPicker
           label={__("Text Color", "b-blocks")}
-          color={attributes.color}
-          onChange={(value) => setAttributes({ color: value })}
+          color={categoryButtoncolor}
+          onChange={(value) => setAttributes({ categoryButtoncolor: value })}
+        />
+        <BoxControl
+          label={__("Border Radius", "b-blocks")}
+          values={categoryButtonRadius}
+          onChange={(newValue) =>
+            setAttributes({
+              categoryButtonRadius: newValue,
+            })
+          }
         />
         <RangeControl
           label={__("Font Size", "b-blocks")}
-          value={parseInt(attributes.fontSize, 10)}
-          onChange={(value) => setAttributes({ fontSize: `${value}px` })}
+          value={parseInt(categoryButtonFontSize, 10)}
+          onChange={(value) =>
+            setAttributes({ categoryButtonFontSize: `${value}px` })
+          }
           min={10}
           max={50}
         />
         <TextControl
           label={__("Font Weight", "b-blocks")}
-          value={attributes.fontWeight}
-          onChange={(value) => setAttributes({ fontWeight: value })}
+          value={categoryButtonFontWeight}
+          onChange={(value) =>
+            setAttributes({ categoryButtonFontWeight: value })
+          }
         />
         <TextControl
           label={__("Font Family", "b-blocks")}
-          value={attributes.fontFamily}
-          onChange={(value) => setAttributes({ fontFamily: value })}
+          value={categoryButtonFontFamily}
+          onChange={(value) =>
+            setAttributes({ categoryButtonFontFamily: value })
+          }
         />
         <RangeControl
           label={__("Line Height", "b-blocks")}
-          value={parseFloat(attributes.lineHeight)}
-          onChange={(value) => setAttributes({ lineHeight: value.toString() })}
+          value={parseFloat(categoryButtonLineHeight)}
+          onChange={(value) =>
+            setAttributes({ categoryButtonLineHeight: value.toString() })
+          }
           min={1}
           max={3}
           step={0.1}
         />
         <TextControl
           label={__("Letter Spacing (px)", "b-blocks")}
-          value={attributes.letterSpacing}
-          onChange={(value) => setAttributes({ letterSpacing: value })}
+          value={categoryButtonLetterSpacing}
+          onChange={(value) =>
+            setAttributes({ categoryButtonLetterSpacing: value })
+          }
         />
 
-        <TextControl
+        {/* <TextControl
           label={__("Margin", "b-blocks")}
           value={attributes.margin.top}
           onChange={(value) =>
@@ -451,6 +495,21 @@ const Style = ({ attributes, setAttributes }) => {
           value={attributes.padding.top}
           onChange={(value) =>
             setAttributes({ padding: { ...attributes.padding, top: value } })
+          }
+        /> */}
+
+        <BoxControl
+          label="Padding"
+          values={categoryButtonPadding}
+          onChange={(newPadding) =>
+            setAttributes({ categoryButtonPadding: newPadding })
+          }
+        />
+        <BoxControl
+          label="Margin"
+          values={categoryButtonMargin}
+          onChange={(newMargin) =>
+            setAttributes({ categoryButtonMargin: newMargin })
           }
         />
       </PanelBody>

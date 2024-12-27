@@ -182,11 +182,11 @@
       "default": "left"
     },
 
-    "categoryButtonBackgroundColor": {
+    "categoryBackgroundColor": {
       "type": "string",
       "default": "#FFFFFF"
     },
-    "categoryButtonColor": {
+    "categoryButtoncolor": {
       "type": "string",
       "default": "#FFA500"
     },
@@ -220,6 +220,15 @@
       }
     },
     "categoryButtonPadding": {
+      "type": "object",
+      "default": {
+        "top": "0px",
+        "right": "0px",
+        "bottom": "0px",
+        "left": "0px"
+      }
+    },
+    "categoryButtonRadius": {
       "type": "object",
       "default": {
         "top": "0px",
