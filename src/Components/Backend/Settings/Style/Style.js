@@ -385,6 +385,92 @@ const Style = ({ attributes, setAttributes }) => {
           setAttributes={setAttributes}
         />
       </PanelBody>
+
+      {/* Category Button Styles */}
+      <PanelBody
+        title={__("Category Button Styling", "b-blocks")}
+        className="bPlPanelBody"
+        initialOpen={false}
+      >
+        <p>
+          <strong>Background Color</strong>
+        </p>
+        <ColorPicker
+          label={__("Background Color", "b-blocks")}
+          color={attributes.backgroundColor}
+          onChange={(value) => setAttributes({ backgroundColor: value })}
+        />
+        <p>
+          <strong>Text Color</strong>
+        </p>
+        <ColorPicker
+          label={__("Text Color", "b-blocks")}
+          color={attributes.color}
+          onChange={(value) => setAttributes({ color: value })}
+        />
+        <RangeControl
+          label={__("Font Size", "b-blocks")}
+          value={parseInt(attributes.fontSize, 10)}
+          onChange={(value) => setAttributes({ fontSize: `${value}px` })}
+          min={10}
+          max={50}
+        />
+        <TextControl
+          label={__("Font Weight", "b-blocks")}
+          value={attributes.fontWeight}
+          onChange={(value) => setAttributes({ fontWeight: value })}
+        />
+        <TextControl
+          label={__("Font Family", "b-blocks")}
+          value={attributes.fontFamily}
+          onChange={(value) => setAttributes({ fontFamily: value })}
+        />
+        <RangeControl
+          label={__("Line Height", "b-blocks")}
+          value={parseFloat(attributes.lineHeight)}
+          onChange={(value) => setAttributes({ lineHeight: value.toString() })}
+          min={1}
+          max={3}
+          step={0.1}
+        />
+        <TextControl
+          label={__("Letter Spacing (px)", "b-blocks")}
+          value={attributes.letterSpacing}
+          onChange={(value) => setAttributes({ letterSpacing: value })}
+        />
+
+        <TextControl
+          label={__("Margin", "b-blocks")}
+          value={attributes.margin.top}
+          onChange={(value) =>
+            setAttributes({ margin: { ...attributes.margin, top: value } })
+          }
+        />
+        <TextControl
+          label={__("Padding", "b-blocks")}
+          value={attributes.padding.top}
+          onChange={(value) =>
+            setAttributes({ padding: { ...attributes.padding, top: value } })
+          }
+        />
+      </PanelBody>
+      {/* <PanelBody title={__("Spacing", "b-blocks")} initialOpen={false}>
+        <TextControl
+          label={__("Margin (Top)", "b-blocks")}
+          value={attributes.margin.top}
+          onChange={(value) =>
+            setAttributes({ margin: { ...attributes.margin, top: value } })
+          }
+        />
+        <TextControl
+          label={__("Padding (Top)", "b-blocks")}
+          value={attributes.padding.top}
+          onChange={(value) =>
+            setAttributes({ padding: { ...attributes.padding, top: value } })
+          }
+        />
+        
+      </PanelBody> */}
     </>
   );
 };

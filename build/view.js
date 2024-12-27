@@ -49,7 +49,6 @@ const Style = ({
   //    background: ${buttonColor}
   // }
 
-  console.log("border value", attributes.imageBorderStyle, attributes.imageBorderWidth, attributes.imageBorderColor, attributes.imageBorderRadius);
   const {
     fontSize,
     fontWeight,
@@ -57,7 +56,6 @@ const Style = ({
     letterSpacing,
     fontFamily
   } = attributes;
-  console.log(fontFamily, fontWeight, "font");
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("style", {
     dangerouslySetInnerHTML: {
       __html: `

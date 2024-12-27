@@ -28,17 +28,9 @@ const Style = ({ attributes, id }) => {
   //    background: ${buttonColor}
   // }
 
-  console.log(
-    "border value",
-    attributes.imageBorderStyle,
-    attributes.imageBorderWidth,
-    attributes.imageBorderColor,
-    attributes.imageBorderRadius
-  );
-
   const { fontSize, fontWeight, lineHeight, letterSpacing, fontFamily } =
     attributes;
-  console.log(fontFamily, fontWeight, "font");
+  
 
   return (
     <style
